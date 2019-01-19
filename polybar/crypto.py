@@ -5,17 +5,17 @@ import sys
 import requests
 from decimal import Decimal
 
-config = configparser.ConfigParser()
+# creates an array?
+config = configparser.ConfigParser() 
 
-# File must be opened with utf-8 explicitly
-with open('~/.config/polybar/crypto-config', 'r', encoding='utf-8') as f:
+# File must be opened with utf-8 explicitly 
+with open('/home/nathan/.config/polybar/crypto-config', 'r', encoding='utf-8') as f:
 	config.read_file(f)
 
 # Everything except the general section
 currencies = [x for x in config.sections() if x != 'general']
 base_currency = config['general']['base_currency']
 params = {'convert': base_currency}
-
 
 for currency in currencies:
 	icon = config[currency]['icon']

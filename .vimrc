@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged-ins')
 
 Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-commentary'
+Plug 'christoomey/vim-system-copy'
 
 call plug#end()
 

@@ -1,2 +1,2 @@
 # dot-files
-Various confiiguration files for my Linux machine
+Various configuration files for my Manjaro Linux machine

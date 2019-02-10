@@ -60,15 +60,35 @@ get_session(){
 	echo "dbus-launch ${dbus_args[*]}"
 }
 
-# in the current configuration, exec i3
-exec $(get_session)
-
 # No keyboard beeping
-xset b off
+exec xset b off
 
-# Unknow reason for the following line
-betterlockscreen -w dim
+# Unknown reason for the following line
+exec betterlockscreen -w dim
 
 # The following line restores the previously used colorscheme
 # but does not alter the background.
-wal -n -R 
+exec wal -n -R 
+
+# maybe do all the configuration stuff before you execute
+# i3?
+
+# this file is not run with root privileges, just an FYI
+
+# This checks whether I am in range of IllinoisNet wifi
+# and then starts a systemd unit file to automatically
+# connect to IllinoisNet
+# it currently does not work, because netctl requires root privileges.
+#exec nmcli dev wifi list > /home/nathan/Downloads/wifi.txt
+
+#if grep -q "IllinoisNet" /home/nathan/Downloads/wifi.txt ; then
+	#exec netctl start IllinoisNet
+	#echo "Netctl profile IllinoisNet started" >> /home/nathan/Downloads/wifi.txt
+#else
+	#echo "Netctl profile IllinoisNet NOT started" >> /home/nathan/Downloads/wifi.txt
+#fi
+
+# in the current configuration, exec i3
+exec $(get_session)
+
+

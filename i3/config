@@ -113,7 +113,10 @@ default_border pixel 2
 # then put these into the chart below
 # this is for human readibility & also depends on how wal assigns 
 # its fiften colors for use by applications
+# Pywal integrates with i3 in a special way.
+# See https://github.com/dylanaraps/pywal/wiki/Customization for more information.information
 set $focused_border #ffa500
+set_from_resource $fg i3wm.color7
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #ffffff #ffffff #ffffff #ffffff   $focused_border

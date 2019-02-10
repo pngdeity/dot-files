@@ -28,7 +28,8 @@ font-0 = Noto Sans:pixelsize=16:weight=bold;2
 font-1 = cryptocoins:style=Regular;0
 
 modules-left = i3 
-modules-right = battery
+modules-center = day-until
+modules-right = battery 
 
 enable-ipc = true
 
@@ -45,6 +46,7 @@ font-0 = Noto Sans:pixelsize=16:weight=bold;2
 font-1 = cryptocoins:style=Regular;0
 
 modules-left = i3 
+modules-center = day-until
 modules-right = battery
 
 enable-ipc = true
@@ -73,6 +75,21 @@ label-separator-foreground = ${colors.foreground}
 type = custom/script
 exec = ~/.config/polybar/battery-combined-shell.sh
 interval = 100
+
+[module/day-until]
+type = custom/script
+exec = ~/.config/polybar/day-until.sh
+interval = 2000
+
+[module/motivation]
+type = custom/script
+exec = ~/.config/polybar/shuffle-line.sh
+interval = 86000
+
+[module/updates-arch-combined]
+type = custom/script
+exec = ~/.config/polybar/updates-arch-combined.sh
+interval = 600
 
 [settings]
 screenchange-reload = true

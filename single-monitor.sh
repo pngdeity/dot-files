@@ -6,5 +6,8 @@
 xrandr --output DP1 --primary
 xrandr --output eDP1 --left-of DP1
 xrandr --output eDP1 --off
+# this line causes an error because launch.sh includes a call to 
+# putting a polybar onto eDP1, which was just turned off
 . ~/.config/polybar/launch.sh
 . ~/.fehbg
+xset -b

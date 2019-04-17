@@ -12,5 +12,5 @@
 # -u - only execute the command if the copied files are newer
 # -r - recursively add the directory argument(s)
 
-\cp -u ~/.bashrc ~/.vimrc ~/.Xresources ~/.xinitrc ~/dual-monitor.sh ~/single-monitor.sh ~/github/dot-files/
+\cp -u ~/.bashrc ~/.vimrc ~/.Xresources ~/.xinitrc ~/dual-monitor.sh ~/single-monitor.sh ~/firefox-setup.sh ~/github/dot-files/
 \cp -ru ~/.config/i3/ ~/.config/polybar ~/github/dot-files/

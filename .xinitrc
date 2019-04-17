@@ -5,7 +5,7 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-# what is the SESSION environment variable
+# Here xfce is kept as a default
 SESSION=${1:-xfce}
 
 # merge in defaults and keymaps
@@ -61,17 +61,11 @@ get_session(){
 }
 
 # No keyboard beeping
-exec xset b off
-
-# Unknown reason for the following line
-exec betterlockscreen -w dim
+exec xset -b
 
 # The following line restores the previously used colorscheme
 # but does not alter the background.
 exec wal -n -R 
-
-# maybe do all the configuration stuff before you execute
-# i3?
 
 # this file is not run with root privileges, just an FYI
 
@@ -88,7 +82,5 @@ exec wal -n -R
 	#echo "Netctl profile IllinoisNet NOT started" >> /home/nathan/Downloads/wifi.txt
 #fi
 
-# in the current configuration, exec i3
+# exec i3
 exec $(get_session)
-
-

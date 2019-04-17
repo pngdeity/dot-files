@@ -31,3 +31,10 @@ augroup END
 
 " Turn on line numbers
 set number
+
+" Allow backspace over specified text objects
+set backspace=indent,eol,start 
+
+" Runs command-line command "setlocal spell spelllang=en_us"
+" for all text files i.e. turns on vim's built-in spellcheck.
+autocmd FileType text setlocal spell spelllang=en_us

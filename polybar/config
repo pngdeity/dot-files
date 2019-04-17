@@ -24,7 +24,7 @@ fixed-center = true
 foreground = ${colors.foreground}
 background = ${colors.background}
 
-font-0 = Noto Sans:pixelsize=16:weight=bold;2
+font-0 = Noto Sans:pixelsize=21:weight=bold;2
 font-1 = cryptocoins:style=Regular;0
 
 modules-left = i3 

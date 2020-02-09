@@ -115,7 +115,7 @@ default_border pixel 2
 # its fiften colors for use by applications
 # Pywal integrates with i3 in a special way.
 # See https://github.com/dylanaraps/pywal/wiki/Customization for more information.information
-set $focused_border #ffa500
+set $focused_border #F25D70
 set_from_resource $fg i3wm.color7
 
 # class                 border  backgr. text    indicator child_border

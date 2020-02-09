@@ -11,6 +11,7 @@ Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-system-copy'
 Plug 'mattn/vim-starwars'
+" Plug 'vim-scripts/TetrIs.vim'
 
 call plug#end()
 
@@ -37,4 +38,17 @@ set backspace=indent,eol,start
 
 " Runs command-line command "setlocal spell spelllang=en_us"
 " for all text files i.e. turns on vim's built-in spellcheck.
-autocmd FileType text setlocal spell spelllang=en_us
+autocmd FileType text setlocal spell spelllang=en_us,fr
+
+" Add French to spell-checked languages
+" set spelllang+=fr
+
+" Set tabs to four spaces
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+

@@ -4,3 +4,7 @@
 # In my case, the tabs are those I check for updates, e.g. Facebook Messenger, online email, etc.
 
 firefox $(cat /home/nathan/Documents/firefox-tab-list.txt | tr '\n' ' ') &
+thunderbird &
+signal-desktop &
+exit
+# kill -9 $PPID

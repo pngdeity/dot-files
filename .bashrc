@@ -99,6 +99,10 @@ alias spotify='spotify --force-device-scale-factor=2' # spotify hiDPI issue
 alias v=vim				  # vim masterrace
 alias e=exit				  # close the terminal
 alias ls="ls -A --color=auto"		  # don't be hiding things from me terminal
+alias rm='rm -i'			  # Makes the remove command interactive, practically speaking, prompts for deletion
+alias good-morning='sh ~/good-morning.sh'
+alias lock='physlock -m'
+alias clear-downloads='rm -rf ~/Downloads/*'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -159,3 +163,9 @@ PATH=":$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/nathan/google-cloud-sdk/path.bash.inc' ]; then . '/home/nathan/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/nathan/google-cloud-sdk/completion.bash.inc' ]; then . '/home/nathan/google-cloud-sdk/completion.bash.inc'; fi

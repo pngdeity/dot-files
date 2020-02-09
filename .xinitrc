@@ -5,8 +5,8 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-# Here xfce is kept as a default
-SESSION=${1:-xfce}
+# Here i3 is kept as a default
+SESSION=${1:-i3}
 
 # merge in defaults and keymaps
 
@@ -82,5 +82,7 @@ exec wal -n -R
 	#echo "Netctl profile IllinoisNet NOT started" >> /home/nathan/Downloads/wifi.txt
 #fi
 
-# exec i3
+# turn on numlock
+numlockx &
+
 exec $(get_session)

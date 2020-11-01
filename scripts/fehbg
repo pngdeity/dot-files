@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-max '/home/nathan/Pictures/wallpapers/desktop/blade-runner-street.jpg' 

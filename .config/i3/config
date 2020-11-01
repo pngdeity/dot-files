@@ -115,7 +115,7 @@ default_border pixel 2
 # its fiften colors for use by applications
 # Pywal integrates with i3 in a special way.
 # See https://github.com/dylanaraps/pywal/wiki/Customization for more information.information
-set $focused_border #F25D70
+set $focused_border #718A62
 set_from_resource $fg i3wm.color7
 
 # class                 border  backgr. text    indicator child_border
@@ -146,3 +146,15 @@ exec ~/github/customization-automation/wal.sh
 
 # Lock computer keyboard shortcut (rough execution)
 # bindsym $mod+shift+x exec systemctl suspend 
+#
+# Start rescuetime 
+exec rescuetime 
+
+# Turn Num Lock on in X
+exec numlockx on
+
+# Resize containers 
+bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt

@@ -9,7 +9,7 @@
 
 xrandr --output DP1 --primary
 xrandr --output DP1 --scale 2x2
-xrandr --output eDP1 --left-of DP1
+xrandr --output eDP1 --left-of DP1 # why set eDP1 to be left-of, when it will be turned off?
 . ~/.config/polybar/launch.sh
 xrandr --output eDP1 --off
 . ~/.fehbg

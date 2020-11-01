@@ -82,7 +82,7 @@ exec wal -n -R
 	#echo "Netctl profile IllinoisNet NOT started" >> /home/nathan/Downloads/wifi.txt
 #fi
 
-# turn on numlock
+# turn on Num Lock
 numlockx &
 
 exec $(get_session)

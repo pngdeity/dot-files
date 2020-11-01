@@ -25,3 +25,6 @@ URxvt.internalBorder:           25
 URxvt.perl-ext:	 		default,matcher
 URxvt.url-launcher:             firefox
 URxvt.matcher.button: 		1
+
+! Line below added for wttr.in
+xft:symbola:size=10:minspace=False

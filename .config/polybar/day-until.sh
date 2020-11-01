@@ -1,6 +1,6 @@
 #!/bin/bash
 
 current=$(date +%s)
-end=$(date -d "10 June" +%s)
+end=$(date -d "12 May" +%s)
 let remain=$(((end-current)/86400))
-echo $remain days until THE END
+echo " $remain days until THE END "

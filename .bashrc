@@ -1,4 +1,4 @@
-#
+
 # ~/.bashrc
 #
 
@@ -90,19 +90,22 @@ fi
 
 unset use_color safe_term match_lhs sh
 
+# User set preferences
 alias cp='cp -i'			  # prompt if files will be overwritten
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less			  	  # these are terminal pagers
 alias spotify='spotify --force-device-scale-factor=2' # spotify hiDPI issue
-alias v=vim				  # vim masterrace
 alias e=exit				  # close the terminal
-alias ls="ls -A --color=auto"		  # don't be hiding things from me terminal
+alias ls="ls -A --color=auto"		  # list all hidden files, in color
 alias rm='rm -i'			  # Makes the remove command interactive, practically speaking, prompts for deletion
 alias good-morning='sh ~/good-morning.sh'
-alias lock='physlock -m'
-alias clear-downloads='rm -rf ~/Downloads/*'
+alias lock='physlock -m -p abandon_all_hope_ye_who_enter_here' # locks the screen, silencing any kernel messages
+alias clear-downloads='rm -rf ~/Downloads/*' # remove, without prompt, all files and directories in ~/Downloads
+alias poly='sh ~/.config/polybar/launch.sh' # launch polybar more easily
+alias brainworkshop='python3 ~/Documents/brainworkshop/brainworkshop/brainworkshop.pyw' # launch brainworkshop more easily
+alias zoom='env QT_SCALE_FACTOR=2 zoom &' # adjust scaling of Zoom on external display
 
 xhost +local:root > /dev/null 2>&1
 
@@ -149,23 +152,20 @@ ex ()
 # Makes pyWal colorscheme persist for new terminal instances
 (cat ~/.cache/wal/sequences &)
 
-# Necessary to access gem (a Ruby package manager) commands in the terminal
-if which ruby >/dev/null && which gem >/dev/null; then
-	PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
+# Why are you setting environment variables in this file, rather than ~/.profile?
+# See ArchWiki on Bash, subheading Shell and environment variables
 
-# Add ~/.local/bin to PATH for jupyter-lab
-PATH="/home/nathan/.local/bin:$PATH"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Add for create-react-app
-PATH=":$PATH"
+# Implementing the XDG Base Directory Specification
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Clean up related to the above
+export LESSHISTFILE="-"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/nathan/google-cloud-sdk/path.bash.inc' ]; then . '/home/nathan/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/nathan/google-cloud-sdk/completion.bash.inc' ]; then . '/home/nathan/google-cloud-sdk/completion.bash.inc'; fi
+# Default Programs
+export EDITOR=/usr/share/vim

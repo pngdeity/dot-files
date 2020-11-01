@@ -1,16 +1,25 @@
 " Welcome to your .vimrc!
 
+" Make Vim conform to the XDG Home Directory Standard
+set undodir=$XDG_DATA_HOME/vim/undo
+set directory=$XDG_DATA_HOME/vim/swap
+set backupdir=$XDG_DATA_HOME/vim/backup
+set viewdir=$XDG_DATA_HOME/vim/view
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+
 " The following line turns syntax highlighting on by default.
 syntax on
 
 " This section is for installing vim plugins.
 " See https://github.com/junegunn/vim-plug for more information.
-call plug#begin('~/.vim/plugged-ins')
+call plug#begin('~/.config/vim/plugged-ins')
 
 Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-system-copy'
 Plug 'mattn/vim-starwars'
+" Plug 'lervag/vimtex'
 " Plug 'vim-scripts/TetrIs.vim'
 
 call plug#end()
@@ -52,3 +61,4 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
+" let g:tex_flavor = 'latex'

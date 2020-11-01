@@ -169,3 +169,9 @@ export LESSHISTFILE="-"
 
 # Default Programs
 export EDITOR=/usr/share/vim
+
+# Following line taken from tlvince.com/vim-respect-xdg
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export HISTFILE="$XDG_DATA_HOME"/bash/history

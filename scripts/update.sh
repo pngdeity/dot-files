@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script gathers the various configuration files littered around my machine into
-# my github repo
+# my GitHub repo
 
 # TODO
 # Write a script to gather a list of all files in the Github directory

@@ -85,4 +85,9 @@ exec wal -n -R
 # turn on Num Lock
 numlockx &
 
+USERXSESSION="$XDG_CACHE_HOME/x11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/x11/xsession-errors"
+
 exec $(get_session)

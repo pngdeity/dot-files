@@ -9,6 +9,6 @@
 xrandr --output DP1 --right-of eDP1
 xrandr --output DP1 --scale 2x2
 . ~/.config/polybar/launch.sh
-. ~/.fehbg
+. ~/github/customization-automation/wal.sh
 g610-led -a 10
 xset -b

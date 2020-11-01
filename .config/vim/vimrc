@@ -1,5 +1,7 @@
 " Welcome to your .vimrc!
 
+set nocompatible
+
 " Make Vim conform to the XDG Home Directory Standard
 set undodir=$XDG_DATA_HOME/vim/undo
 set directory=$XDG_DATA_HOME/vim/swap
@@ -20,13 +22,11 @@ Plug 'tpope/vim-commentary'
 Plug 'christoomey/vim-system-copy'
 Plug 'mattn/vim-starwars'
 " Plug 'lervag/vimtex'
-" Plug 'vim-scripts/TetrIs.vim'
 
 call plug#end()
 
 " This section configures the Pencil plugin.
 " See https://github.com/reedes/vim-pencil for more information.
-set nocompatible
 filetype plugin on
 
 " Set the default wrap mode to soft, as in MS Word.

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
+userresources=$HOME/.config/X11/xresources-default
+usermodmap=$HOME/.config/X11/xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
@@ -46,7 +46,7 @@ get_session(){
 		enlightenment) dbus_args+=(enlightenment_start) ;;
 		fluxbox) dbus_args+=(startfluxbox) ;;
 		gnome) dbus_args+=(gnome-session) ;;
-		i3|i3wm) dbus_args+=(i3 --shmlog-size 0) ;;
+		i3|i3wm) dbus_args+=(i3 --shmlog-size 26214400) ;;
 		jwm) dbus_args+=(jwm) ;;
 		kde) dbus_args+=(startkde) ;;
 		lxde) dbus_args+=(startlxde) ;;
@@ -61,26 +61,11 @@ get_session(){
 }
 
 # No keyboard beeping
-exec xset -b
+xset -b & 
 
 # The following line restores the previously used colorscheme
 # but does not alter the background.
-exec wal -n -R 
-
-# this file is not run with root privileges, just an FYI
-
-# This checks whether I am in range of IllinoisNet wifi
-# and then starts a systemd unit file to automatically
-# connect to IllinoisNet
-# it currently does not work, because netctl requires root privileges.
-#exec nmcli dev wifi list > /home/nathan/Downloads/wifi.txt
-
-#if grep -q "IllinoisNet" /home/nathan/Downloads/wifi.txt ; then
-	#exec netctl start IllinoisNet
-	#echo "Netctl profile IllinoisNet started" >> /home/nathan/Downloads/wifi.txt
-#else
-	#echo "Netctl profile IllinoisNet NOT started" >> /home/nathan/Downloads/wifi.txt
-#fi
+wal -n -R  & 
 
 # turn on Num Lock
 numlockx &
@@ -89,5 +74,8 @@ USERXSESSION="$XDG_CACHE_HOME/x11/xsession"
 USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
 ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
 ERRFILE="$XDG_CACHE_HOME/x11/xsession-errors"
+
+# This process is not run in the background to prevent race conditions with xrdb & i3
+autorandr --force --change
 
 exec $(get_session)

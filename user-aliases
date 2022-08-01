@@ -1,0 +1,23 @@
+# This file has user set aliases.
+# It is sourced by ~/.bashrc
+
+# Transcluded from ~/.bashrc on creation of this file
+alias cp='cp -i'			  # prompt if files will be overwritten
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less			  	  # these are terminal pagers
+# alias spotify='spotify --force-device-scale-factor=2' # spotify hiDPI issue
+alias e=exit				  # close the terminal
+alias ls="ls -A --color=auto"		  # list all hidden files, in color
+alias rm='rm -i'			  # Makes the remove command interactive, practically speaking, prompts for deletion
+alias clear-downloads='rm -rf ~/Downloads/*' # remove, without prompt, all files and directories in ~/Downloads
+alias poly='sh ~/.config/polybar/launch.sh' # launch polybar more easily
+alias brainworkshop='python3 ~/Documents/brainworkshop/brainworkshop/brainworkshop.pyw' # launch brainworkshop more easily
+alias zoom='env QT_SCALE_FACTOR=2 zoom &' # adjust scaling of Zoom on external display
+alias abs='mpv ~/videos/manifold-er/at-home-core-workout-bodybuilding-dot-com.mkv &'
+alias cleer='cd && clear'
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+
+# Nextcloud document shortcuts
+alias pw='vim $HOME/nextcloud/pressing-work.txt'

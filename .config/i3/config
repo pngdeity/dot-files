@@ -1,8 +1,30 @@
+# Colors
+set_from_resource $black i3wm.color0 #1d2021
+set_from_resource $darkred i3wm.color1 #cc241d
+set_from_resource $darkgreen i3wm.color2 #98971a
+set_from_resource $darkyellow i3wm.color3 #d79921
+set_from_resource $darkblue i3wm.color4 #458588
+set_from_resource $darkmagenta i3wm.color5 #b16286
+set_from_resource $darkcyan i3wm.color6 #689d6a
+set_from_resource $lightgray i3wm.color7 #a89984
+set_from_resource $gray i3wm.color8 #928374
+set_from_resource $red i3wm.color9 #fb4934
+set_from_resource $green i3wm.color10 #b8bb26
+set_from_resource $yellow i3wm.color11 #fabd2f
+set_from_resource $blue i3wm.color12 #83a598
+set_from_resource $magenta i3wm.color13 #d3869b
+set_from_resource $cyan i3wm.color14 #8ec07c
+set_from_resource $white i3wm.color15 #ebdbb2
+set_from_resource $background i3wm.background #1d2021
+set_from_resource $background-alt i3wm.color3 #ff0202
+set_from_resource $foreground i3wm.foreground #ebdbb2
+set_from_resource $foreground-alt i3wm.color2 #ff0202
+set_from_resource $highlight i3wm.color3 #ff0202
+
+set_from_resource $font i3wm.font
+
 # Set modifier key to Windows key (Mod4)
 set $mod Mod4
-
-# Set font
-font pango:Overpass Regular 8
 
 # Press mod key to be able to resize floating windows
 floating_modifier $mod
@@ -17,8 +39,7 @@ bindsym $mod+Return exec --no-startup-id urxvt
 bindsym $mod+Shift+q kill
 
 # Open dmenu 
-# why are these colors manual?!¿!?
-bindsym $mod+d exec dmenu_run -fn 'Overpass Mono:pixelsize=15' -l 3 -nf '#707880' -sf '#cc6666' -nb '#1d1f21' -sb '#1d1f21'
+bindsym $mod+d exec dmenu_run -fn '$font' -l 3 -nf '$foreground' -sf '$foreground-alt' -nb '$background' -sb '$background'
 
 # Change focus
 bindsym $mod+h focus left
@@ -32,7 +53,7 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# Split in horizoNtal orientation
+# Split in horizontal orientation
 bindsym $mod+n split horizontal
 
 # Split in Vertical orientation
@@ -43,8 +64,8 @@ bindsym $mod+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+t layout tabbed
+# bindsym $mod+e layout toggle split
 
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -81,14 +102,11 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
+
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-
 bindsym $mod+Shift+r restart
-# Exit i3 (logs you out of your X session)
 
-# what is nagbar?
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+# Enter resize mode
 bindsym $mod+r mode "resize"
 
 # Resize window (you can also use the mouse for that)
@@ -103,55 +121,41 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# Sets the default width to 2 pixels 
-default_border pixel 2
+default_border pixel 3
+for_window [class="Pavucontrol"] floating enable, resize set 640 480, border normal
 
-# Window colors 
-# variables first, for example
-# set $main i3wm.color0
-# set $accent1 i3wm.color2
-# then put these into the chart below
-# this is for human readibility & also depends on how wal assigns 
-# its fiften colors for use by applications
-# Pywal integrates with i3 in a special way.
-# See https://github.com/dylanaraps/pywal/wiki/Customization for more information.information
-set $focused_border #718A62
-set_from_resource $fg i3wm.color7
+# colorclass                 border  backgr. text    indicator child_border
+client.focused          $foreground-alt $background $foreground $darkcyan $foreground-alt
+client.focused_inactive #ffffff #ffffff #ffffff $darkyellow $foreground 
+client.unfocused        #ffffff #ffffff #ffffff $darkgray $gray
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #ffffff #ffffff #ffffff #ffffff   $focused_border
-client.focused_inactive #ffffff #ffffff #ffffff #ffffff   $unfocused_border
-client.unfocused        #ffffff #ffffff #ffffff #ffffff   $unfocused_border
-client.urgent           #ffffff #ffffff #ffffff #ffffff   $focused_border
-client.placeholder      #ffffff #ffffff #ffffff #ffffff   #ffffff
-client.background       #ffffff
-
+# Consider using the tool pulseaudio-control to achieve changing the sink volume of whichever sink is active, not just sink number 0
+# this may require using a separate script
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# bindsym XF86AudioPlay exec playerctl play
+# bindsym XF86AudioPause exec playerctl pause
+# bindsym XF86AudioNext exec playerctl next
+# bindsym XF86AudioPrev exec playerctl previous
 
 # Execute polybar on launch. Script kills current ones on i3 refresh, otherwise they duplicate
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # reset previously used background
-# exec --no-startup-id source /home/nathan/.fehbg
-exec ~/github/customization-automation/wal.sh
+exec ~/scripts/wal.sh
 
-# Lock computer keyboard shortcut (rough execution)
-# bindsym $mod+shift+x exec systemctl suspend 
-#
 # Start rescuetime 
-exec rescuetime 
+# exec rescuetime 
 
 # Turn Num Lock on in X
 exec numlockx on
+
+# Force apply the first detected autorandr setup
+# exec autorandr --force --change
 
 # Resize containers 
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt

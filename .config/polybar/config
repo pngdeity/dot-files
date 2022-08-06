@@ -1,21 +1,8 @@
 ;V A R I A B L E S
 
 [colors]
-; you can source colors from your xrdb, enumerated in ~/.Xresources
-; this would help with keeping themes consistent across the machine
-; as well as make updating the theme easier
 ; key_color_name = ${xrdb:key_name_in_xrdb:fallback_value}
-; See pyWal documentation for more information on consistent
-; formatting across applications
-; #ff0202 is a violent red, FYI
-; background = #aa2F343F
-;background-alt = ${xrdb:color3:#ff0202}
-;foreground = ${xrdb:color7:#ff0202}
-;foreground-alt = ${xrdb:color2:#ff0202}
-highlight = ${xrdb:color3:#ff0202}
-;urgent = #ff0202
 
-; colors below from Luke Smith
 black = ${xrdb:color0:#1d2021}
 darkred = ${xrdb:color1:#cc241d}
 darkgreen = ${xrdb:color2:#98971a}
@@ -32,45 +19,60 @@ blue = ${xrdb:color12:#83a598}
 magenta = ${xrdb:color13:#d3869b}
 cyan = ${xrdb:color14:#8ec07c}
 white = ${xrdb:color15:#ebdbb2}
-background = ${xrdb:color256:#1d2021}
-foreground = ${xrdb:color257:#ebdbb2}
+background = ${xrdb:background:#1d2021}
+background-alt = ${xrdb:color3:#ff0202}
+foreground = ${xrdb:foreground:#ebdbb2}
+foreground-alt = ${xrdb:color2:#ff0202}
+highlight = ${xrdb:color3:#ff0202}
 
 [bar/main]
-monitor = eDP1
+monitor = eDP-1
 width = 100%
 height = 2.22222%
 fixed-center = true
 
+; [bar/main]
+; Pending correct syntax, this should set this bar to use the environments variable $MONITOR
+; Syntax key = ${env:variable_name:fallback_value}
+; monitor = ${env:MONITOR:DVI-1-1}
+; width = 100%
+; height = ${POLYBAR-PERCENTAGE:2.22222%}
+; fixed-center = true
+
+
 foreground = ${colors.foreground}
 background = ${colors.background}
 
-font-0 = Noto Sans:pixelsize=21:weight=bold;2
-font-1 = cryptocoins:style=Regular;0
+font-0 = ${xrdb:font:Noto Sans:pixelsize=16}
+font-1 = "cryptocoins:style=Regular"
+font-2 = "Noto Color Emoji:scale=10"
+font-3 = "NotoEmoji Nerd Font Mono:style=Book"
+font-4 = "Weather Icons:style=Regular"
 
 modules-left = i3 
-modules-center = text
-modules-right = temperature pulseaudio battery 
+modules-center =
+modules-right = crypto temperature pulseaudio-control battery 
 
 enable-ipc = true
+
+dpi = ${xrdb:dpi:96}
+format-pulseaudio-margin = 30 
+
+module-margin = 2
+
+[bar/external-vertical]
+monitor = DP-1-2
+inherit = bar/main
+height = 1.25%
 
 [bar/external]
-monitor = DP1
-width = 100%
-height = 2.22222%
-fixed-center = true
+monitor = DP-1-1
+inherit = bar/main
 
-foreground = ${colors.foreground}
-background = ${colors.background}
-
-font-0 = Noto Sans:pixelsize=16:weight=bold;2
-font-1 = cryptocoins:style=Regular;0
-
-modules-left = i3 
-modules-center = text
-modules-right = pulseaudio battery
-
-enable-ipc = true
-format-pulseaudio-margin= 30 
+; [bar/portrait]
+; monitor = ${MONITOR:DVI-I-1-1} # Pending correcct syntax, this should set this bar to use the monitor in the $MONITOR environment variable
+; inherit = bar/main
+; height = 1.25%
 
 ;M O D U L E S
 
@@ -97,56 +99,60 @@ type = custom/script
 exec = ~/.config/polybar/battery-combined-shell.sh
 interval = 100
 
-[module/day-until]
+[module/crypto]
 type = custom/script
-exec = ~/.config/polybar/day-until.sh
-interval = 2000
+exec = ~/.config/polybar/ticker-ethusd.sh
+interval = 100
 
-[module/motivation]
+[module/pulseaudio-control]
 type = custom/script
-exec = ~/.config/polybar/shuffle-line.sh
-interval = 86000
+tail = true
+format-underline = ${colors.cyan}
+label-padding = 2
+label-foreground = ${colors.foreground}
 
-[module/updates-arch-combined]
+; Consider the option '--color-muted <rrggbb>' as it currently default
+; https://github.com/polybar/polybar/wiki/Formatting#format-tags-inside-polybar-config
+; Modularize to work with colors defined above
+; --icons-volume " , "
+exec = pulseaudio-control --icon-muted "🔇 " --format '$VOL_ICON ${VOL_LEVEL}% $NODE_NICKNAME' --node-nicknames-from "device.description" --node-nickname "alsa_output.usb-DisplayLink_Plugable_UD_6950H_190497-02.analog-stereo: 📻" --node-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo: 💻" --node-nickname "bluez_sink.E4_22_A5_2F_DF_DB.a2dp_sink: 🎧" listen
+; exec = pulseaudio-control --icon-muted "🔇 " --format '$VOL_ICON ${VOL_LEVEL}% $SINK_NICKNAME' --sink-nicknames-from "device.description" --sink-nickname "alsa_output.usb-DisplayLink_Plugable_UD_6950H_190497-02.analog-stereo: 📻" --sink-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo: 💻" --sink-nickname "bluez_sink.E4_22_A5_2F_DF_DB.a2dp_sink: 🎧" listen
+
+click-middle = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-right = pulseaudio-control next-node
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
+
+[module/corona]
 type = custom/script
-exec = ~/.config/polybar/updates-arch-combined.sh
+interval = 3600
+format = <label>
+exec = python ~/.config/polybar/coronaWidget.py -p "Illinois" -pre "🦠 " -ar -lo united-states
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/openweathermap-fullfeatured.sh
 interval = 600
-
-[module/pulseaudio]
-type = internal/pulseaudio
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
-use-ui-max = false
-
-label-muted = " MUTE " 
-label-volume = " %percentage% "
-
-[module/text]
-type = custom/script
-exec = ~/.config/polybar/display-text.sh
-tail = false
+label-font = 5
+; Try to get only the icons to display in the $label-font, and not the numbers
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
 
-format = <label>
-format-underline = ${colors.red}
-format-warn = <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.darkmagenta}
-
-;ramp-0 = 
-;ramp-foreground = ${colors.gray}
+interval = 2
+; Zone 4 is presumedly the battery's thermal zone
+thermal-zone = 4
+label = TEMP %temperature-c%
+label-warn = TEMP %temperatuer-c%
+label-warn-foreground = #FF0000
 
 [settings]
 screenchange-reload = true
+; pseudo-transparency = true
+; To enable again, make sure to set relevant backgrounds to #00000000
 
 [global/wm]
-margin-top = 5
 margin-bottom = 5
 
-vim:ft=dosini
+; vim:ft=dosini

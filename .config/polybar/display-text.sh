@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo 'Stay on the path.'
+echo -ne '\xEE\x80\xAD'

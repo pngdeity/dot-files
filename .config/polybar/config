@@ -26,19 +26,11 @@ foreground-alt = ${xrdb:color2:#ff0202}
 highlight = ${xrdb:color3:#ff0202}
 
 [bar/main]
-monitor = eDP-1
+; Syntax key = ${env:variable_name:fallback_value}
+monitor = ${env:MONITOR:eDP-1}
 width = 100%
 height = 2.22222%
 fixed-center = true
-
-; [bar/main]
-; Pending correct syntax, this should set this bar to use the environments variable $MONITOR
-; Syntax key = ${env:variable_name:fallback_value}
-; monitor = ${env:MONITOR:DVI-1-1}
-; width = 100%
-; height = ${POLYBAR-PERCENTAGE:2.22222%}
-; fixed-center = true
-
 
 foreground = ${colors.foreground}
 background = ${colors.background}
@@ -60,19 +52,10 @@ format-pulseaudio-margin = 30
 
 module-margin = 2
 
-[bar/external-vertical]
-monitor = DP-1-2
+[bar/portrait]
 inherit = bar/main
+monitor = ${env:MONITOR:DP-1-2} 
 height = 1.25%
-
-[bar/external]
-monitor = DP-1-1
-inherit = bar/main
-
-; [bar/portrait]
-; monitor = ${MONITOR:DVI-I-1-1} # Pending correcct syntax, this should set this bar to use the monitor in the $MONITOR environment variable
-; inherit = bar/main
-; height = 1.25%
 
 ;M O D U L E S
 
@@ -115,7 +98,7 @@ label-foreground = ${colors.foreground}
 ; https://github.com/polybar/polybar/wiki/Formatting#format-tags-inside-polybar-config
 ; Modularize to work with colors defined above
 ; --icons-volume " , "
-exec = pulseaudio-control --icon-muted "🔇 " --format '$VOL_ICON ${VOL_LEVEL}% $NODE_NICKNAME' --node-nicknames-from "device.description" --node-nickname "alsa_output.usb-DisplayLink_Plugable_UD_6950H_190497-02.analog-stereo: 📻" --node-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo: 💻" --node-nickname "bluez_sink.E4_22_A5_2F_DF_DB.a2dp_sink: 🎧" listen
+exec = pulseaudio-control --icon-muted "🔇 " --format '$VOL_ICON ${VOL_LEVEL}% $NODE_NICKNAME' --node-nicknames-from "device.description" --node-nickname "alsa_output.usb-DisplayLink_Plugable_UD_6950H_190497-02.analog-stereo: 📻" --node-nickname "bluez_sink.E4_22_A5_2F_DF_DB.a2dp_sink: 🎧" listen
 ; exec = pulseaudio-control --icon-muted "🔇 " --format '$VOL_ICON ${VOL_LEVEL}% $SINK_NICKNAME' --sink-nicknames-from "device.description" --sink-nickname "alsa_output.usb-DisplayLink_Plugable_UD_6950H_190497-02.analog-stereo: 📻" --sink-nickname "alsa_output.pci-0000_00_1f.3.analog-stereo: 💻" --sink-nickname "bluez_sink.E4_22_A5_2F_DF_DB.a2dp_sink: 🎧" listen
 
 click-middle = exec pavucontrol &
@@ -144,7 +127,7 @@ interval = 2
 ; Zone 4 is presumedly the battery's thermal zone
 thermal-zone = 4
 label = TEMP %temperature-c%
-label-warn = TEMP %temperatuer-c%
+label-warn = TEMP %temperature-c%
 label-warn-foreground = #FF0000
 
 [settings]

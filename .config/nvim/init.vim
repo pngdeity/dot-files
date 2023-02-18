@@ -27,6 +27,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'maximbaz/lightline-ale'
 
+" A GitHub copilot alternative
+Plug 'Exafunction/codeium.vim'
+
 " Snippet support
 if s:using_snippets
   Plug 'sirver/ultisnips'
@@ -222,3 +225,15 @@ set number
 
 " Set relative line numbers
 set relativenumber
+
+" Enable file type detection
+filetype on
+
+" Disable Exafunction/codeium Tab key binding
+let g:codeium_no_map_tab = v:true
+
+" Disable codeium on certain filetypes
+" let g:codeium_filetypes = {
+"   \ 'bash': V:false,
+"   \ 'typescript': v:true,
+"   \ }

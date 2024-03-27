@@ -1,1 +1,106 @@
+### GLOBAL OPTIONS
+
+directory: ~/music
+library: ~/.config/beets/library.db
+threaded: true
+ui:
+  color: true
+
+plugins: inline chroma scrub replaygain info unimported zero mbsync listenbrainz edit autobpm
+original_date: true
+
+### IMPORT OPTIONS
+
+# from_scratch says to remove existing metadata on import
+# write controls whether metadata is written to the audio files (in addition to
+# the library database file)
+# languages set to en ensures that if it exists, the English transliteration
+# will be used for metadata
+import:
+  log: ~/.config/beets/import.log
+  autotag: true
+  move: false
+  write: true
+  from_scratch: true
+  languages: en
+
+musicbrainz:
+  searchlimit: 3
+  externalids:
+    spotify: yes
+
+match:
+  preferred:
+    original_year: true
+  ignored_media: ['Data CD', 'DVD', 'DVD-Video', 'Blu-ray', 'HD-DVD',
+                    'VCD', 'SVCD', 'UMD', 'VHS']
+paths:
+  default: $albumartist/$album/%if{$multidisc,Disc $disc/}$track $title
+  comp:true Various Artists/$album%aunique{}/$track $artist $title
+
+### PLUGINS
+
+# Inline - define your own variables for paths
+item_fields:
+  multidisc: 1 if disctotal > 1 else 0
+  initial: albumartist[0].upper() + "."
+  # disc_and_track: '%02i.%02i' % (disc, track) if disctotal > 1 else '%02i' % (track)
+
+listenbrainz:
+  token: 
+  username: pngdeity
+
+# Allows custom actions in response to events
+# event -> a plugin event to trigger the hook
+# command -> the action taken
+# May be useful to beet write after using parallel import for replaygain
+
+# hook:
+  # hooks:
+    # - event: item_imported
+    #   command: beet write  
+
+# Allows nulling of files' metadata values
+# fields -> a list of metadata fields to nullify
+# update_database -> Update both the library and the file tags
+zero:
+  auto: true
+  fields: images lyrics comments genre
+  # update_database: true
+
+mbsubmit:
+  threshold: strong
+
+autobpm:
+  auto: false
+  overwrite: true
+
+scrub:
+  auto: true 
+
+# Identify music with acoustic fingerprinting using the Chromaprint library
+# Use beet submit [QUERY] to submit your local fingerprints to the public
+# database maintained by the AcoustID project (and authors of Chromaprint)
+
+chroma:
+  auto: true
+acoustid:
+  apikey: BXQbvOJzhs 
+
+# The overwrite option is poorly named. From the docs: "On import, re-analyze files that already have ReplayGain tags."
+# parallel_on_import refers to thread parallelization (i.e. on a single logical
+# core). Per the docs, this doesn't write the generated metadata to the respective files correctly (but it does write to the user's library file correctly) during the import
+# process. Hence, when enabling parallel_on_import, users must run beet write
+# after importing.
+
+replaygain:
+  auto: true
+  threads: 4
+  parallel_on_import: false
+  backend: ffmpeg
+  overwrite: false
+  peak: "true" # bruh
+
+  # backend: command
+  # noclip: true
 
